@@ -4,10 +4,9 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import ChatBubble from '@/components/ChatBubble';
 
-const Spline = dynamic(
-  () => import('@splinetool/react-spline/dist/react-spline.js').then((mod) => mod.default),
-  { ssr: false }
-);
+const SplineWrapper = dynamic(() => import('@/components/SplineWrapper'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -34,9 +33,7 @@ export default function Home() {
             className="w-full h-full cursor-pointer"
             onClick={() => setIsChatOpen(true)}
           >
-            <Spline
-              scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode"
-            />
+            <SplineWrapper scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode" />
           </div>
         </div>
 
