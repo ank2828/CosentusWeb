@@ -1,12 +1,13 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from neo4j import GraphDatabase
+from graphiti_core import Graphiti
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from datetime import datetime
 from typing import Optional
+import asyncio
 
 # Load environment variables
 load_dotenv()
@@ -22,13 +23,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Neo4j driver
-neo4j_driver = GraphDatabase.driver(
+# Initialize Graphiti with Neo4j
+graphiti = Graphiti(
     os.getenv("NEO4J_URI", "bolt://localhost:7687"),
-    auth=(
-        os.getenv("NEO4J_USER", "neo4j"),
-        os.getenv("NEO4J_PASSWORD", "Kashkarian_1228")
-    )
+    os.getenv("NEO4J_USER", "neo4j"),
+    os.getenv("NEO4J_PASSWORD", "Kashkarian_1228")
 )
 
 # Initialize OpenAI client
@@ -50,68 +49,38 @@ class ChatResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"status": "COSE AI Backend Running", "version": "1.0.0"}
-
-
-def search_knowledge_graph(query: str, limit: int = 5):
-    """Search Neo4j for relevant context"""
-    context_items = []
-
-    with neo4j_driver.session() as session:
-        # Search for nodes containing the query text
-        result = session.run("""
-            MATCH (n:Conversation)
-            WHERE n.content CONTAINS $query
-            RETURN n.content as content, n.timestamp as timestamp
-            ORDER BY n.timestamp DESC
-            LIMIT $limit
-        """, query=query.lower(), limit=limit)
-
-        for record in result:
-            context_items.append({
-                "content": record["content"],
-                "timestamp": record["timestamp"]
-            })
-
-    return context_items
-
-
-def store_conversation(session_id: str, user_message: str, ai_response: str):
-    """Store conversation in Neo4j"""
-    with neo4j_driver.session() as session:
-        session.run("""
-            CREATE (c:Conversation {
-                session_id: $session_id,
-                user_message: $user_message,
-                ai_response: $ai_response,
-                content: $content,
-                timestamp: datetime()
-            })
-        """,
-            session_id=session_id,
-            user_message=user_message,
-            ai_response=ai_response,
-            content=f"User: {user_message}\nAssistant: {ai_response}"
-        )
+    return {"status": "COSE AI Backend Running with Graphiti", "version": "2.0.0"}
 
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
-        # 1. Search knowledge graph for relevant context
-        context_items = search_knowledge_graph(request.message, limit=3)
+        # 1. Search knowledge graph with Graphiti for relevant context
+        search_results = await graphiti.search(
+            query=request.message,
+            num_results=5
+        )
 
-        # Build context text
+        # Extract facts and context from search results
+        context_items = []
         context_text = ""
-        if context_items:
-            for item in context_items:
-                context_text += f"- {item['content']}\n"
 
-        # 2. Build prompt with context
+        if search_results:
+            for result in search_results:
+                fact = getattr(result, 'fact', None) or getattr(result, 'content', str(result))
+                score = getattr(result, 'score', 0)
+
+                context_items.append({
+                    "content": fact,
+                    "score": score
+                })
+                context_text += f"- {fact}\n"
+
+        # 2. Build prompt with extracted knowledge
         system_prompt = f"""You are COSE AI, an expert assistant for Revenue Cycle Management (RCM).
 You help healthcare providers optimize their revenue cycles through AI-powered solutions.
 
-Relevant context from previous conversations:
+Relevant knowledge from graph database:
 {context_text if context_text else "No previous context found."}
 
 Use this context to provide accurate, helpful responses about RCM topics."""
@@ -131,11 +100,15 @@ Use this context to provide accurate, helpful responses about RCM topics."""
             # Fallback if no API key
             response_text = f"I'm COSE AI, your RCM assistant. (Note: OpenAI API key not configured - using demo mode). You asked: {request.message}"
 
-        # 4. Store conversation in knowledge graph
-        store_conversation(
-            session_id=request.session_id,
-            user_message=request.message,
-            ai_response=response_text
+        # 4. Store conversation in Graphiti knowledge graph
+        # Graphiti automatically extracts entities and relationships!
+        episode_content = f"User asked: {request.message}\nAssistant responded: {response_text}"
+
+        await graphiti.add_episode(
+            name=f"chat_{request.session_id}_{datetime.utcnow().timestamp()}",
+            episode_body=episode_content,
+            source_description="COSE AI Chat Interface",
+            reference_time=datetime.utcnow()
         )
 
         return ChatResponse(
@@ -144,6 +117,9 @@ Use this context to provide accurate, helpful responses about RCM topics."""
         )
 
     except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"Error: {error_details}")
         raise HTTPException(status_code=500, detail=f"Error processing chat: {str(e)}")
 
 
@@ -151,16 +127,14 @@ Use this context to provide accurate, helpful responses about RCM topics."""
 async def add_knowledge(content: str, source: str = "manual"):
     """Endpoint to manually add knowledge to the graph"""
     try:
-        with neo4j_driver.session() as session:
-            session.run("""
-                CREATE (k:Knowledge {
-                    content: $content,
-                    source: $source,
-                    timestamp: datetime()
-                })
-            """, content=content, source=source)
+        await graphiti.add_episode(
+            name=f"knowledge_{datetime.utcnow().timestamp()}",
+            episode_body=content,
+            source_description=source,
+            reference_time=datetime.utcnow()
+        )
 
-        return {"status": "success", "message": "Knowledge added to graph"}
+        return {"status": "success", "message": "Knowledge added to graph with entity extraction"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error adding knowledge: {str(e)}")
 

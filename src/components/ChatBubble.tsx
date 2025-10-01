@@ -34,6 +34,12 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
   const [isResizing, setIsResizing] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const chatRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   useEffect(() => {
     if (isOpen && chatRef.current) {
@@ -97,14 +103,15 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
   const handleSend = async () => {
     if (!inputValue.trim() || isLoading) return;
 
+    const userMessageText = inputValue;
     const newMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue,
+      text: userMessageText,
       sender: 'user',
       timestamp: new Date(),
     };
 
-    setMessages([...messages, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
     setInputValue('');
     setIsLoading(true);
 
@@ -201,15 +208,8 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
             onMouseDown={handleMouseDown}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden relative">
-                <Image
-                  src="/images/Screenshot 2025-09-30 at 7.21.27 PM.png"
-                  alt="COSE AI"
-                  fill
-                  sizes="40px"
-                  className="object-cover"
-                  unoptimized
-                />
+              <div className="w-10 h-10 rounded-full overflow-hidden relative bg-cyan-500 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">CA</span>
               </div>
               <div>
                 <h3 className="text-white font-semibold">COSE AI</h3>
@@ -299,6 +299,7 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
