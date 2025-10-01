@@ -1,15 +1,20 @@
 'use client';
 
-import Spline from '@splinetool/react-spline/next';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import ChatBubble from '@/components/ChatBubble';
+
+const Spline = dynamic(
+  () => import('@splinetool/react-spline/dist/react-spline.js').then((mod) => mod.default),
+  { ssr: false }
+);
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
     <main>
-      <section className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative min-h-screen w-full" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
@@ -18,16 +23,21 @@ export default function Home() {
               linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px)
             `,
             backgroundSize: '60px 60px',
-            maskImage: 'radial-gradient(ellipse 3000px 2200px at top right, black 0%, transparent 60%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 3000px 2200px at top right, black 0%, transparent 60%)'
+            maskImage: 'radial-gradient(ellipse at top right, black 0%, transparent 70%)',
+            WebkitMaskImage: 'radial-gradient(ellipse at top right, black 0%, transparent 70%)'
           }}
         />
 
         {/* Spline Container - LOCKED IN PLACE */}
         <div className="fixed inset-0 w-full h-screen z-0">
-          <Spline
-            scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode"
-          />
+          <div
+            className="w-full h-full cursor-pointer"
+            onClick={() => setIsChatOpen(true)}
+          >
+            <Spline
+              scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode"
+            />
+          </div>
         </div>
 
         {/* Content that goes over the Spline */}
@@ -53,7 +63,7 @@ export default function Home() {
               >
                 Talk to COSE AI Now
               </button>
-              <button className="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors pointer-events-auto">
+              <button className="border-2 border-gray-900 text-gray-900 bg-gray-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-300 transition-colors pointer-events-auto">
                 See Our AI in Action
               </button>
             </div>

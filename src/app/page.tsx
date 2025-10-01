@@ -7,10 +7,10 @@ export default function Home() {
       <Hero />
 
       {/* Content Below Hero - Scrollable */}
-      <section className="min-h-screen bg-white px-8 py-24">
+      <section className="min-h-screen px-8 py-24" style={{ backgroundColor: '#01B2D6' }}>
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-5xl font-bold">About</h2>
-          <p className="mt-6 text-xl text-gray-700">
+          <h2 className="text-5xl font-bold text-white">About</h2>
+          <p className="mt-6 text-xl text-white">
             Your content sections go here...
           </p>
         </div>
