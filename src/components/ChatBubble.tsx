@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface Message {
   id: string;
@@ -26,6 +26,71 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
   const [inputValue, setInputValue] = useState('');
   const [isMinimized, setIsMinimized] = useState(false);
   const [isVoiceMode, setIsVoiceMode] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [size, setSize] = useState({ width: 600, height: 400 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const chatRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen && chatRef.current) {
+      setPosition({
+        x: 32,
+        y: window.innerHeight - size.height - 32
+      });
+    }
+  }, [isOpen, size.height]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - position.x,
+      y: e.clientY - position.y
+    });
+  };
+
+  const handleResizeMouseDown = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsResizing(true);
+    setDragStart({
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        setPosition({
+          x: e.clientX - dragStart.x,
+          y: e.clientY - dragStart.y
+        });
+      }
+      if (isResizing) {
+        setSize({
+          width: Math.max(400, size.width + (e.clientX - dragStart.x)),
+          height: Math.max(300, size.height + (e.clientY - dragStart.y))
+        });
+        setDragStart({ x: e.clientX, y: e.clientY });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      setIsResizing(false);
+    };
+
+    if (isDragging || isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isResizing, dragStart, size]);
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
@@ -56,11 +121,20 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
 
   return (
     <div
-      className={`fixed bottom-8 left-8 z-50 transition-all duration-300 ${
-        isMinimized ? 'w-16 h-16' : 'w-96 h-[500px]'
+      ref={chatRef}
+      className={`fixed z-50 transition-opacity duration-500 ease-in-out ${
+        isMinimized ? 'w-16 h-16' : ''
       }`}
       style={{
-        animation: isOpen ? 'slideInFromAvatar 0.3s ease-out' : '',
+        left: isMinimized ? 'auto' : `${position.x}px`,
+        top: isMinimized ? 'auto' : `${position.y}px`,
+        bottom: isMinimized ? '2rem' : 'auto',
+        right: isMinimized ? '2rem' : 'auto',
+        width: isMinimized ? 'auto' : `${size.width}px`,
+        height: isMinimized ? 'auto' : `${size.height}px`,
+        cursor: isDragging ? 'grabbing' : 'default',
+        opacity: isOpen ? 1 : 0,
+        pointerEvents: isOpen ? 'auto' : 'none',
       }}
     >
       {isMinimized ? (
@@ -87,7 +161,10 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
         // Expanded Chat
         <div className="bg-white rounded-2xl shadow-2xl flex flex-col h-full overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-500 p-4 flex items-center justify-between">
+          <div
+            className="bg-gray-900 p-4 flex items-center justify-between cursor-grab active:cursor-grabbing"
+            onMouseDown={handleMouseDown}
+          >
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                 <span className="text-cyan-500 font-bold">CA</span>
@@ -183,7 +260,7 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
           </div>
 
           {/* Input */}
-          <div className="p-4 bg-white border-t">
+          <div className="p-4 bg-white border-t relative">
             <div className="flex space-x-2">
               <input
                 type="text"
@@ -200,6 +277,14 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
                 Send
               </button>
             </div>
+            {/* Resize Handle */}
+            <div
+              className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
+              onMouseDown={handleResizeMouseDown}
+              style={{
+                background: 'linear-gradient(135deg, transparent 50%, #999 50%)',
+              }}
+            />
           </div>
         </div>
       )}

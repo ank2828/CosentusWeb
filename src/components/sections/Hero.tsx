@@ -24,10 +24,16 @@ export default function Home() {
         />
 
         {/* Spline Container - LOCKED IN PLACE */}
-        <div className="fixed inset-0 w-full h-screen z-0">
+        <div
+          className="fixed inset-0 w-full h-screen z-0 transition-opacity duration-200 ease-in-out"
+          style={{
+            opacity: isChatOpen ? 0 : 1,
+            pointerEvents: isChatOpen ? 'none' : 'auto'
+          }}
+        >
           <div
             className="w-full h-full cursor-pointer"
-            onClick={() => setIsChatOpen(true)}
+            onClick={() => setIsChatOpen(!isChatOpen)}
           >
             <SplineWrapper scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode" />
           </div>
@@ -50,10 +56,7 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex gap-4 justify-end">
-              <button
-                onClick={() => setIsChatOpen(true)}
-                className="bg-gray-900 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors pointer-events-auto"
-              >
+              <button className="bg-gray-900 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors pointer-events-auto">
                 Talk to COSE AI Now
               </button>
               <button className="border-2 border-gray-900 text-gray-900 bg-gray-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-300 transition-colors pointer-events-auto">
