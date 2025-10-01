@@ -9,13 +9,13 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative h-screen w-full overflow-hidden bg-gray-200">
+      <section className="relative h-screen w-full overflow-hidden bg-blue-600">
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(6, 182, 212, 0.3) 1.5px, transparent 1.5px),
-              linear-gradient(to bottom, rgba(6, 182, 212, 0.3) 1.5px, transparent 1.5px)
+              linear-gradient(to right, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px)
             `,
             backgroundSize: '60px 60px',
             maskImage: 'radial-gradient(ellipse 3000px 2200px at top right, black 0%, transparent 60%)',
@@ -33,15 +33,15 @@ export default function Home() {
         {/* Content that goes over the Spline */}
         <div className="relative z-10 flex items-start justify-end h-full pointer-events-none px-8 md:px-16 lg:px-24 pt-32">
           <div className="max-w-4xl text-right">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 leading-tight pointer-events-none">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight pointer-events-none">
               Meet the Future of Revenue Cycle Management
             </h1>
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-6 pointer-events-none">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6 pointer-events-none">
               AI Agents That Work 24/7 While You Focus on Patient Care
             </h2>
 
             {/* Sub-copy */}
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed pointer-events-none">
+            <p className="text-xl text-white mb-8 leading-relaxed pointer-events-none">
               3 AI agents processing claims, answering calls, and optimizing revenue—backed by 1,000+ human experts and 25 years of proven results.
             </p>
 
