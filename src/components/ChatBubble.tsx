@@ -172,7 +172,9 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
                   src="/images/Screenshot 2025-09-30 at 7.21.27 PM.png"
                   alt="COSE AI"
                   fill
+                  sizes="40px"
                   className="object-cover"
+                  unoptimized
                 />
               </div>
               <div>
