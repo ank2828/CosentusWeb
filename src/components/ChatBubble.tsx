@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Message {
   id: string;
@@ -117,12 +118,10 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
     }, 1000);
   };
 
-  if (!isOpen) return null;
-
   return (
     <div
       ref={chatRef}
-      className={`fixed z-50 transition-opacity duration-500 ease-in-out ${
+      className={`fixed z-50 ${
         isMinimized ? 'w-16 h-16' : ''
       }`}
       style={{
@@ -134,6 +133,8 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
         height: isMinimized ? 'auto' : `${size.height}px`,
         cursor: isDragging ? 'grabbing' : 'default',
         opacity: isOpen ? 1 : 0,
+        transform: isOpen ? 'translateY(0)' : 'translateY(30px)',
+        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
         pointerEvents: isOpen ? 'auto' : 'none',
       }}
     >
@@ -166,8 +167,13 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
             onMouseDown={handleMouseDown}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-cyan-500 font-bold">CA</span>
+              <div className="w-10 h-10 rounded-full overflow-hidden relative">
+                <Image
+                  src="/images/Screenshot 2025-09-30 at 7.21.27 PM.png"
+                  alt="COSE AI"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-white font-semibold">COSE AI</h3>
