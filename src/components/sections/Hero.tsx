@@ -1,12 +1,8 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import ChatBubble from '@/components/ChatBubble';
-
-const SplineWrapper = dynamic(() => import('@/components/SplineWrapper'), {
-  ssr: false,
-});
+import SplineWrapper from '@/components/SplineWrapper';
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
