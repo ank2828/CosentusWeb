@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative h-screen w-full overflow-hidden bg-blue-600">
+      <section className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
