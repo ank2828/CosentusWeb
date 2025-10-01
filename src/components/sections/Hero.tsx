@@ -24,7 +24,7 @@ export default function Home() {
         />
 
         {/* Spline Container - LOCKED IN PLACE */}
-        <div className="fixed left-0 top-0 w-1/2 h-screen z-0">
+        <div className="fixed inset-0 w-full h-screen z-0">
           <Spline
             scene="https://prod.spline.design/5ZgkWUcsZYt4PlRw/scene.splinecode"
           />
