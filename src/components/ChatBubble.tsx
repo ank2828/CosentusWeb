@@ -27,6 +27,7 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
   const [inputValue, setInputValue] = useState('');
   const [isMinimized, setIsMinimized] = useState(false);
   const [isVoiceMode, setIsVoiceMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ width: 600, height: 400 });
   const [isDragging, setIsDragging] = useState(false);
@@ -93,8 +94,8 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
     };
   }, [isDragging, isResizing, dragStart, size]);
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
+  const handleSend = async () => {
+    if (!inputValue.trim() || isLoading) return;
 
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -105,17 +106,50 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
 
     setMessages([...messages, newMessage]);
     setInputValue('');
+    setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Call Python FastAPI backend
+      const response = await fetch('http://localhost:8000/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: newMessage.text,
+          session_id: 'user_session_' + Date.now(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from AI');
+      }
+
+      const data = await response.json();
+
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I'm here to help! Our AI-powered RCM solutions can process claims 24/7, optimize revenue, and reduce administrative burden. What specific aspect would you like to know more about?",
+        text: data.response,
         sender: 'ai',
         timestamp: new Date(),
       };
+
       setMessages((prev) => [...prev, aiResponse]);
-    }, 1000);
+    } catch (error) {
+      console.error('Error calling AI:', error);
+
+      // Fallback error message
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm having trouble connecting right now. Please make sure the Python backend is running on port 8000.",
+        sender: 'ai',
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -280,9 +314,10 @@ export default function ChatBubble({ isOpen, onClose }: ChatBubbleProps) {
               />
               <button
                 onClick={handleSend}
-                className="bg-cyan-500 text-white px-6 py-2 rounded-full hover:bg-cyan-600 transition-colors"
+                disabled={isLoading}
+                className="bg-cyan-500 text-white px-6 py-2 rounded-full hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send
+                {isLoading ? 'Sending...' : 'Send'}
               </button>
             </div>
             {/* Resize Handle */}
