@@ -1,4 +1,5 @@
 import Hero from '@/components/sections/Hero'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -8,14 +9,10 @@ export default function Home() {
 
       {/* Content Below Hero - Scrollable */}
       <section className="min-h-screen py-24" style={{ backgroundColor: '#01B2D6' }}>
-        <div className="mx-auto max-w-7xl px-8 mb-12">
-          <h2 className="text-5xl font-bold text-white">About</h2>
-        </div>
-
-        <div className="pr-12 max-w-7xl mx-auto">
+        <div className="px-8">
           {/* Glassy Card */}
           <div
-            className="relative p-12 shadow-2xl ml-auto"
+            className="relative p-12 shadow-2xl flex items-center"
             style={{
               backgroundColor: 'rgba(255, 255, 255, 0.5)',
               backdropFilter: 'blur(40px)',
@@ -23,7 +20,9 @@ export default function Home() {
               border: '1px solid rgba(255, 255, 255, 0.6)',
               borderRadius: '3rem',
               minHeight: '500px',
-              width: '85%'
+              maxWidth: '1200px',
+              marginLeft: 'auto',
+              marginRight: '3rem'
             }}
           >
             {/* Top Left Corner Label */}
@@ -40,11 +39,15 @@ export default function Home() {
               <span className="text-gray-900 font-semibold text-lg">Have you met Cindy?</span>
             </div>
 
-            {/* Card Content */}
-            <div style={{ marginTop: '2rem' }}>
-              <p className="text-xl text-white leading-relaxed">
-                Content about Cindy goes here...
-              </p>
+            {/* Cindy Image */}
+            <div className="flex items-center justify-start" style={{ marginTop: '3rem' }}>
+              <Image
+                src="/images/ChatGPT Image Oct 1, 2025, 03_12_24 PM.png"
+                alt="Cindy AI Avatar"
+                width={345}
+                height={345}
+                style={{ objectFit: 'contain' }}
+              />
             </div>
           </div>
         </div>
