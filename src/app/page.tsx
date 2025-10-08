@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
 
       {/* Content Below Hero - Scrollable */}
-      <section className="relative py-16 md:py-24 pb-32 md:pb-48" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative pt-32 md:pt-48 pb-32 md:pb-48" style={{ backgroundColor: '#01B2D6' }}>
         <div className="px-4 md:px-8" style={{ position: 'relative', zIndex: 1 }}>
           <CindyCard />
           <ChrisCard />

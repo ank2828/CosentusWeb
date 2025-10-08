@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative min-h-screen w-full" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative min-h-[150vh] w-full" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
@@ -69,29 +69,41 @@ export default function Home() {
         </div>
 
         {/* Content that goes over the Spline */}
-        <div className={`relative z-10 flex items-start ${isMobile ? 'justify-center' : 'justify-end'} h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-24' : 'pt-32'}`}>
-          <div className={isMobile ? 'text-center' : 'text-right'} style={{ width: '100%', maxWidth: '1280px' }}>
-            <h1 className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-6xl lg:text-7xl'} font-bold text-white mb-4 leading-tight pointer-events-none`} style={{ marginLeft: 'auto', maxWidth: '1400px' }}>
-              Your Practice Deserves a Billing Partner That Works Smarter, Not Just Harder
-            </h1>
-            <div style={{ marginLeft: 'auto', maxWidth: '896px' }}>
-              <h2 className={`${isMobile ? 'text-lg' : 'text-3xl md:text-4xl'} font-semibold text-white mb-6 pointer-events-none`}>
-                At Cosentus, our AI works behind the scenes at every step—verifying eligibility, optimizing claims, preventing denials, and accelerating payments—to maximize your collections and minimize your headaches.
-              </h2>
+        <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-24' : 'pt-32'}`}>
+          {/* Hero Content */}
+          <div className={`flex items-start ${isMobile ? 'justify-center' : 'justify-end'}`}>
+            <div className={isMobile ? 'text-center' : 'text-right'} style={{ width: '100%', maxWidth: '1280px' }}>
+              <h1 className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-6xl lg:text-7xl'} font-bold text-white mb-4 leading-tight pointer-events-none`} style={{ marginLeft: 'auto', maxWidth: '1400px' }}>
+                Your Practice Deserves a Billing Partner That Works Smarter, Not Just Harder
+              </h1>
+              <div style={{ marginLeft: 'auto', maxWidth: '896px' }}>
+                <h2 className={`${isMobile ? 'text-lg' : 'text-3xl md:text-4xl'} font-semibold text-white mb-8 pointer-events-none`}>
+                  At Cosentus, our AI works behind the scenes at every step—verifying eligibility, optimizing claims, preventing denials, and accelerating payments—to maximize your collections and minimize your headaches.
+                </h2>
 
-              {/* Sub-copy */}
-              <p className={`${isMobile ? 'text-sm' : 'text-xl'} text-white mb-8 leading-relaxed pointer-events-none`}>
-                25 years of proven results, now powered by intelligent automation that catches issues before they become denials. Same trusted partnership. Better, faster results.
-              </p>
+                {/* CTA Buttons */}
+                <div className={`flex gap-4 ${isMobile ? 'flex-col justify-center' : 'justify-end'}`}>
+                  <button className={`bg-gray-900 text-white ${isMobile ? 'px-6 py-3' : 'px-8 py-4'} rounded-lg ${isMobile ? 'text-base' : 'text-lg'} font-semibold hover:bg-gray-800 transition-colors pointer-events-auto`}>
+                    See the Difference
+                  </button>
+                  <button className={`border-2 border-gray-900 text-gray-900 bg-gray-200 ${isMobile ? 'px-6 py-3' : 'px-8 py-4'} rounded-lg ${isMobile ? 'text-base' : 'text-lg'} font-semibold hover:bg-gray-300 transition-colors pointer-events-auto`}>
+                    Get Started Today
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              {/* CTA Buttons */}
-              <div className={`flex gap-4 ${isMobile ? 'flex-col justify-center' : 'justify-end'}`}>
-                <button className={`bg-gray-900 text-white ${isMobile ? 'px-6 py-3' : 'px-8 py-4'} rounded-lg ${isMobile ? 'text-base' : 'text-lg'} font-semibold hover:bg-gray-800 transition-colors pointer-events-auto`}>
-                  See the Difference
-                </button>
-                <button className={`border-2 border-gray-900 text-gray-900 bg-gray-200 ${isMobile ? 'px-6 py-3' : 'px-8 py-4'} rounded-lg ${isMobile ? 'text-base' : 'text-lg'} font-semibold hover:bg-gray-300 transition-colors pointer-events-auto`}>
-                  Get Started Today
-                </button>
+          {/* AI Agent Lineup Section - at bottom of hero */}
+          <div className="mt-auto pt-32 md:pt-48 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
+            <div className="pt-12 md:pt-16 border-t-2 border-white/30 text-center max-w-7xl mx-auto">
+              <div className="pt-12 md:pt-16">
+                <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+                  The Cosentus AI Agent Lineup
+                </h2>
+                <p className="text-lg text-white leading-relaxed">
+                  25 years of proven results, now powered by intelligent automation that catches issues before they become denials. Same trusted partnership. Better, faster results.
+                </p>
               </div>
             </div>
           </div>
