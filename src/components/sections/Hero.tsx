@@ -69,8 +69,11 @@ export default function Home() {
 
         {/* Content that goes over the Spline */}
         <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-24' : 'pt-32'}`}>
+          {/* Spacer */}
+          <div className="mt-12 md:mt-16"></div>
+
           {/* Hero Content */}
-          <div className={`flex items-start ${isMobile ? 'justify-center' : 'justify-end'} mt-24 md:mt-32`}>
+          <div className={`flex items-start ${isMobile ? 'justify-center' : 'justify-end'}`}>
             <div className={isMobile ? 'text-center' : 'text-right'} style={{ width: '100%', maxWidth: '1280px' }}>
               <h1 className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-6xl lg:text-7xl'} font-bold text-white mb-4 leading-tight pointer-events-none`} style={{ marginLeft: 'auto', maxWidth: '1400px' }}>
                 Your Practice Deserves a Billing Partner That Works Smarter, Not Just Harder
