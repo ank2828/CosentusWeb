@@ -11,12 +11,12 @@
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.13",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@splinetool/runtime": "^1.10.71",
     "@studio-freight/lenis": "^1.0.42",
-    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.15",
     "class-variance-authority": "^0.7.1",
@@ -28,8 +28,10 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
     "three": "^0.180.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wavesurfer.js": "^7.11.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
@@ -38,7 +40,7 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^3.4.18",
     "zustand": "^5.0.8"
   }
 }

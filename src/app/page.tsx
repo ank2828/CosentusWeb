@@ -1,5 +1,7 @@
 import Hero from '@/components/sections/Hero'
 import Image from 'next/image'
+import CindyCard from '@/components/CindyCard'
+import ChrisCard from '@/components/ChrisCard'
 
 export default function Home() {
   return (
@@ -8,48 +10,10 @@ export default function Home() {
       <Hero />
 
       {/* Content Below Hero - Scrollable */}
-      <section className="min-h-screen py-24" style={{ backgroundColor: '#01B2D6' }}>
-        <div className="px-8">
-          {/* Glassy Card */}
-          <div
-            className="relative p-12 shadow-2xl flex items-center"
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.5)',
-              backdropFilter: 'blur(40px)',
-              WebkitBackdropFilter: 'blur(40px)',
-              border: '1px solid rgba(255, 255, 255, 0.6)',
-              borderRadius: '3rem',
-              minHeight: '500px',
-              maxWidth: '1200px',
-              marginLeft: 'auto',
-              marginRight: '3rem'
-            }}
-          >
-            {/* Top Left Corner Label */}
-            <div
-              className="absolute px-6 py-2 rounded-full shadow-lg"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
-                top: '-1rem',
-                left: '2rem'
-              }}
-            >
-              <span className="text-gray-900 font-semibold text-lg">Have you met Cindy?</span>
-            </div>
-
-            {/* Cindy Image */}
-            <div className="flex items-center justify-start" style={{ marginTop: '3rem' }}>
-              <Image
-                src="/images/ChatGPT Image Oct 1, 2025, 03_12_24 PM.png"
-                alt="Cindy AI Avatar"
-                width={345}
-                height={345}
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-          </div>
+      <section className="relative py-24 pb-48" style={{ backgroundColor: '#01B2D6' }}>
+        <div className="px-8" style={{ position: 'relative', zIndex: 1 }}>
+          <CindyCard />
+          <ChrisCard />
         </div>
       </section>
 

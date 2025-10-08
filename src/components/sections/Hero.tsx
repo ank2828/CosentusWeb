@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import ChatBubble from '@/components/ChatBubble';
 import SplineWrapper from '@/components/SplineWrapper';
+import CosentusChatbot from '@/components/CosentusChatbot';
 
 export default function Home() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,19 +40,25 @@ export default function Home() {
         <div
           className="fixed inset-0 w-full h-screen z-0"
           style={{
-            opacity: isChatOpen ? 0 : 1,
-            pointerEvents: isChatOpen ? 'none' : 'auto',
             transform: `scale(${1 - scrollProgress * 0.5})`,
             transformOrigin: 'bottom left',
-            transition: 'transform 0.1s ease-out, opacity 0.2s ease-in-out'
+            transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
+            opacity: isChatOpen ? 0 : 1,
+            pointerEvents: 'none'
           }}
         >
+          <SplineWrapper scene="https://prod.spline.design/es79cdoxZI9dSURm/scene.splinecode" />
+
+          {/* Clickable area only in bottom-left corner where avatar is */}
           <div
-            className="w-full h-full cursor-pointer"
-            onClick={() => setIsChatOpen(!isChatOpen)}
-          >
-            <SplineWrapper scene="https://prod.spline.design/es79cdoxZI9dSURm/scene.splinecode" />
-          </div>
+            className="absolute bottom-0 left-0 cursor-pointer"
+            style={{
+              width: '400px',
+              height: '400px',
+              pointerEvents: isChatOpen ? 'none' : 'auto'
+            }}
+            onClick={() => setIsChatOpen(true)}
+          />
         </div>
 
         {/* Content that goes over the Spline */}
@@ -85,8 +91,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chat Bubble */}
-      <ChatBubble isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      {/* Cosentus Chatbot - triggered by Spline avatar */}
+      <CosentusChatbot
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        showButton={false}
+        position="bottom-left"
+      />
     </main>
   );
 }
