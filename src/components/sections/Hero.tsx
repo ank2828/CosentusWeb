@@ -40,11 +40,16 @@ export default function Home() {
 
         {/* Spline Container - Smooth shrink on scroll */}
         <div
-          className="fixed inset-0 w-full h-screen"
+          className="fixed w-full h-screen"
           style={{
-            transform: `scale(${1 - scrollProgress * 0.5}) ${isMobile ? 'translateX(-50%)' : ''}`,
+            transform: isMobile
+              ? `translateX(-50%) scale(${1 - scrollProgress * 0.5})`
+              : `scale(${1 - scrollProgress * 0.5})`,
             transformOrigin: isMobile ? 'bottom center' : 'bottom left',
             left: isMobile ? '50%' : '0',
+            top: 0,
+            right: isMobile ? 'auto' : 0,
+            bottom: 0,
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
             pointerEvents: 'none',
