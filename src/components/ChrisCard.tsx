@@ -115,7 +115,6 @@ export default function ChrisCard() {
         barGap: 1,
         height: 64,
         normalize: true,
-        responsive: true,
       });
 
       ws.on('play', () => setIsPlaying(true));

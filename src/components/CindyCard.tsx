@@ -115,7 +115,6 @@ export default function CindyCard() {
         barGap: 1,
         height: 64,
         normalize: true,
-        responsive: true,
       });
 
       ws.on('play', () => setIsPlaying(true));
