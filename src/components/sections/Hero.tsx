@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative min-h-[150vh] w-full" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative min-h-screen w-full" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
