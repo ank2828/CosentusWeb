@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative h-[calc(100vh-1px)] w-full" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative h-[calc(95vh-1px)] w-full" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
@@ -103,9 +103,9 @@ export default function Home() {
         <div className="h-px bg-white/20"></div>
 
         {/* AI Agent Lineup Section */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-12 md:pt-16 pb-32 md:pb-48">
-          <div className="pt-6 md:pt-8 text-center">
-            <div className="pt-4 md:pt-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-6 md:pt-8 pb-32 md:pb-48">
+          <div className="pt-3 md:pt-4 text-center">
+            <div className="pt-2 md:pt-3">
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
                 The Cosentus AI Agent Lineup
               </h2>
