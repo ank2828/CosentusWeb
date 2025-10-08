@@ -52,16 +52,16 @@ export default function Home() {
             opacity: isChatOpen ? 0 : 1,
             pointerEvents: isChatOpen ? 'none' : 'auto',
             zIndex: 5,
-            width: isMobile ? '300px' : '400px',
-            height: isMobile ? '300px' : '400px'
+            width: isMobile ? '150px' : '200px',
+            height: isMobile ? '150px' : '200px'
           }}
           onClick={() => setIsChatOpen(true)}
         >
           <Image
-            src="/images/ChatGPT Image Oct 8, 2025 at 08_42_51 AM.png"
-            alt="Chris Avatar"
-            width={isMobile ? 300 : 400}
-            height={isMobile ? 300 : 400}
+            src="/images/ChatGPT Image Oct 8, 2025 at 12_46_51 PM.png"
+            alt="Cindy Avatar"
+            width={isMobile ? 150 : 200}
+            height={isMobile ? 150 : 200}
             unoptimized
             priority
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
