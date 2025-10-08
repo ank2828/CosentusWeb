@@ -221,7 +221,7 @@ export default function ChrisCard() {
           zIndex: 10
         }}
       >
-        <span style={{ color: '#111827', fontWeight: 600, fontSize: '1.125rem', fontStyle: 'italic' }}>Chris is Pretty Cool Too!</span>
+        <span style={{ color: '#111827', fontWeight: 600, fontSize: '1.125rem', fontStyle: 'italic' }}>How About Chris?</span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
