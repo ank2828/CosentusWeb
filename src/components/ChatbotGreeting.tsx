@@ -13,7 +13,13 @@ interface ChatbotGreetingProps {
 export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrollProgress, isMobile }: ChatbotGreetingProps) {
   if (!isVisible) return null;
 
-  const scale = isMobile ? 0.5 : 1 - scrollProgress * 0.5;
+  // Calculate avatar height based on scale
+  const avatarScale = isMobile ? 0.5 : 1 - scrollProgress * 0.5;
+  const avatarBaseHeight = isMobile ? 150 : 200;
+  const avatarCurrentHeight = avatarBaseHeight * avatarScale;
+
+  // Keep greeting card constant distance (16px) above avatar
+  const greetingBottom = avatarCurrentHeight + 16;
 
   return (
     <div
@@ -21,10 +27,8 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
       style={{
         left: isMobile ? 'auto' : '16px',
         right: isMobile ? '16px' : 'auto',
-        bottom: isMobile ? '150px' : '200px',
-        transform: `scale(${scale})`,
-        transformOrigin: isMobile ? 'bottom right' : 'bottom left',
-        transition: 'transform 0.1s ease-out',
+        bottom: `${greetingBottom}px`,
+        transition: 'bottom 0.1s ease-out',
         opacity: 1
       }}
     >
