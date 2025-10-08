@@ -103,9 +103,9 @@ export default function Home() {
         <div className="h-px bg-white/20"></div>
 
         {/* AI Agent Lineup Section */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-16 md:pt-20 pb-32 md:pb-48">
-          <div className="pt-8 md:pt-12 text-center">
-            <div className="pt-8 md:pt-12">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-12 md:pt-16 pb-32 md:pb-48">
+          <div className="pt-6 md:pt-8 text-center">
+            <div className="pt-4 md:pt-6">
               <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
                 The Cosentus AI Agent Lineup
               </h2>
