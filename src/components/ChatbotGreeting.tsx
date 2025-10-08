@@ -17,7 +17,7 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
     <div
       className="fixed z-40"
       style={{
-        left: isMobile ? '150px' : '200px',
+        left: isMobile ? '130px' : '180px',
         bottom: isMobile ? '75px' : '100px',
         transform: isMobile ? 'scale(0.5)' : `scale(${1 - scrollProgress * 0.5})`,
         transformOrigin: 'bottom left',
@@ -36,21 +36,8 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
             transform: translateY(0);
           }
         }
-
-        .chat-bubble::before {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: -10px;
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 0 10px 15px 0;
-          border-color: transparent white transparent transparent;
-          filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.1));
-        }
       `}</style>
-      <div className="bg-white rounded-xl shadow-xl p-4 max-w-sm relative chat-bubble">
+      <div className="bg-white rounded-xl shadow-xl p-4 w-80 relative">
         {/* Close button */}
         <button
           onClick={onClose}
