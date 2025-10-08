@@ -117,10 +117,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8 md:pt-12 pb-8 md:pb-12">
           <div className="text-center">
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              The Cosentus AI Agent Lineup
+              AI Agents Built on 25 Years of Real Billing Results
             </h2>
             <p className="text-lg text-white leading-relaxed mb-12 md:mb-16">
-              25 years of proven results, now powered by intelligent automation that catches issues before they become denials. Same trusted partnership. Better, faster results.
+              Not just smart technology—proven expertise. Our AI agents catch eligibility issues, answer patient questions instantly, and prevent denials before they happen. Same partnership you trust, now turbocharged.
             </p>
           </div>
         </div>
