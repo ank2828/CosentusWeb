@@ -10,7 +10,16 @@ export default function Home() {
   const isMobile = useIsMobile();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isGreetingVisible, setIsGreetingVisible] = useState(true);
+  const [isGreetingVisible, setIsGreetingVisible] = useState(false);
+
+  // Show greeting after 4 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsGreetingVisible(true);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
