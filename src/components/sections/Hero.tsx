@@ -95,9 +95,9 @@ export default function Home() {
           </div>
 
           {/* AI Agent Lineup Section - at bottom of hero */}
-          <div className="mt-auto pt-32 md:pt-48 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
-            <div className="pt-12 md:pt-16 border-t-2 border-white/30 text-center max-w-7xl mx-auto">
-              <div className="pt-12 md:pt-16">
+          <div className="mt-auto pt-16 md:pt-24 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
+            <div className="pt-8 md:pt-12 border-t-2 border-white/30 text-center max-w-7xl mx-auto">
+              <div className="pt-8 md:pt-12">
                 <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
                   The Cosentus AI Agent Lineup
                 </h2>
