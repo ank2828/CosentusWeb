@@ -42,8 +42,9 @@ export default function Home() {
         <div
           className="fixed inset-0 w-full h-screen"
           style={{
-            transform: `scale(${1 - scrollProgress * 0.5})`,
-            transformOrigin: 'bottom left',
+            transform: `scale(${1 - scrollProgress * 0.5}) ${isMobile ? 'translateX(-50%)' : ''}`,
+            transformOrigin: isMobile ? 'bottom center' : 'bottom left',
+            left: isMobile ? '50%' : '0',
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
             pointerEvents: 'none',
@@ -52,12 +53,15 @@ export default function Home() {
         >
           <SplineWrapper scene="https://prod.spline.design/es79cdoxZI9dSURm/scene.splinecode" />
 
-          {/* Clickable area only in bottom-left corner where avatar is */}
+          {/* Clickable area - centered on mobile, bottom-left on desktop */}
           <div
-            className="absolute bottom-0 left-0 cursor-pointer"
+            className="absolute cursor-pointer"
             style={{
-              width: '400px',
-              height: '400px',
+              bottom: 0,
+              left: isMobile ? '50%' : '0',
+              transform: isMobile ? 'translateX(-50%)' : 'none',
+              width: isMobile ? '300px' : '400px',
+              height: isMobile ? '300px' : '400px',
               pointerEvents: isChatOpen ? 'none' : 'auto'
             }}
             onClick={() => setIsChatOpen(true)}
