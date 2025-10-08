@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/useMediaQuery';
 import Image from 'next/image';
 import CosentusChatbot from '@/components/CosentusChatbot';
+import ChatbotGreeting from '@/components/ChatbotGreeting';
 
 export default function Home() {
   const isMobile = useIsMobile();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isGreetingVisible, setIsGreetingVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -114,6 +116,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Chatbot Greeting Card */}
+      <ChatbotGreeting
+        isVisible={isGreetingVisible && !isChatOpen}
+        onStartChat={() => {
+          setIsChatOpen(true);
+          setIsGreetingVisible(false);
+        }}
+        onClose={() => setIsGreetingVisible(false)}
+      />
 
       {/* Cosentus Chatbot - triggered by Spline avatar */}
       <CosentusChatbot
