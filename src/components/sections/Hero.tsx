@@ -42,9 +42,10 @@ export default function Home() {
         <div
           className="fixed cursor-pointer"
           style={{
-            transform: `scale(${1 - scrollProgress * 0.5})`,
-            transformOrigin: 'bottom left',
-            left: '0',
+            transform: isMobile ? 'scale(0.5)' : `scale(${1 - scrollProgress * 0.5})`,
+            transformOrigin: isMobile ? 'bottom right' : 'bottom left',
+            left: isMobile ? 'auto' : '0',
+            right: isMobile ? '0' : 'auto',
             bottom: 0,
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
@@ -93,7 +94,7 @@ export default function Home() {
           </div>
 
           {/* AI Agent Lineup Section - at bottom of hero */}
-          <div className="mt-auto pt-64 md:pt-80 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
+          <div className="mt-auto pt-96 md:pt-80 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
             <div className="pt-8 md:pt-12 border-t-2 border-white/30 text-center max-w-7xl mx-auto">
               <div className="pt-8 md:pt-12">
                 <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
