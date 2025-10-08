@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/useMediaQuery';
-import SplineWrapper from '@/components/SplineWrapper';
+import Image from 'next/image';
 import CosentusChatbot from '@/components/CosentusChatbot';
 
 export default function Home() {
@@ -38,38 +38,33 @@ export default function Home() {
           }}
         />
 
-        {/* Spline Container - Smooth shrink on scroll */}
+        {/* Avatar Container - Smooth shrink on scroll */}
         <div
-          className="fixed w-full h-screen"
+          className="fixed cursor-pointer"
           style={{
             transform: isMobile
               ? `translateX(-50%) scale(${1 - scrollProgress * 0.5})`
               : `scale(${1 - scrollProgress * 0.5})`,
             transformOrigin: isMobile ? 'bottom center' : 'bottom left',
             left: isMobile ? '50%' : '0',
-            top: 0,
-            right: isMobile ? 'auto' : 0,
             bottom: 0,
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
-            pointerEvents: 'none',
-            zIndex: 5
+            pointerEvents: isChatOpen ? 'none' : 'auto',
+            zIndex: 5,
+            width: isMobile ? '300px' : '400px',
+            height: isMobile ? '300px' : '400px'
           }}
+          onClick={() => setIsChatOpen(true)}
         >
-          <SplineWrapper scene="https://prod.spline.design/es79cdoxZI9dSURm/scene.splinecode" />
-
-          {/* Clickable area - centered on mobile, bottom-left on desktop */}
-          <div
-            className="absolute cursor-pointer"
-            style={{
-              bottom: 0,
-              left: isMobile ? '50%' : '0',
-              transform: isMobile ? 'translateX(-50%)' : 'none',
-              width: isMobile ? '300px' : '400px',
-              height: isMobile ? '300px' : '400px',
-              pointerEvents: isChatOpen ? 'none' : 'auto'
-            }}
-            onClick={() => setIsChatOpen(true)}
+          <Image
+            src="/images/ChatGPT Image Oct 8, 2025 at 08_42_51 AM.png"
+            alt="Chris Avatar"
+            width={isMobile ? 300 : 400}
+            height={isMobile ? 300 : 400}
+            unoptimized
+            priority
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
 
