@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="relative min-h-[60vh] w-full" style={{ backgroundColor: '#01B2D6' }}>
+      <section className="relative h-[calc(100vh-1px)] w-full" style={{ backgroundColor: '#01B2D6' }}>
         {/* Grid Pattern Background */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-[1]"
           style={{
@@ -68,10 +68,7 @@ export default function Home() {
         </div>
 
         {/* Content that goes over the Spline */}
-        <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-32 justify-center' : 'pt-24'}`}>
-          {/* Spacer - desktop only */}
-          {!isMobile && <div className="mt-16"></div>}
-
+        <div className={`relative z-10 flex flex-col h-full items-center justify-center pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-32' : 'pt-24'}`}>
           {/* Hero Content */}
           <div className={`flex items-start ${isMobile ? 'justify-center' : 'justify-end'}`}>
             <div className={isMobile ? 'text-center' : 'text-right'} style={{ width: '100%', maxWidth: '1280px' }}>
@@ -95,18 +92,23 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* AI Agent Lineup Section - at bottom of hero */}
-          <div className="mt-auto pt-96 md:pt-64 pb-8 md:pb-12 -mx-4 md:-mx-16 lg:-mx-24 px-4 md:px-16 lg:px-24" style={{ position: 'relative', zIndex: 10 }}>
-            <div className="pt-8 md:pt-12 border-t-2 border-white/30 text-center max-w-7xl mx-auto">
-              <div className="pt-8 md:pt-12">
-                <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-                  The Cosentus AI Agent Lineup
-                </h2>
-                <p className="text-lg text-white leading-relaxed">
-                  25 years of proven results, now powered by intelligent automation that catches issues before they become denials. Same trusted partnership. Better, faster results.
-                </p>
-              </div>
+      {/* White line separator - Always visible at bottom of viewport */}
+      <section style={{ backgroundColor: '#01B2D6' }}>
+        <div className="h-px bg-white/20"></div>
+
+        {/* AI Agent Lineup Section */}
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pt-16 md:pt-20 pb-32 md:pb-48">
+          <div className="pt-8 md:pt-12 text-center">
+            <div className="pt-8 md:pt-12">
+              <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
+                The Cosentus AI Agent Lineup
+              </h2>
+              <p className="text-lg text-white leading-relaxed">
+                25 years of proven results, now powered by intelligent automation that catches issues before they become denials. Same trusted partnership. Better, faster results.
+              </p>
             </div>
           </div>
         </div>
