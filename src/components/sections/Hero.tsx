@@ -50,7 +50,7 @@ export default function Home() {
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
             pointerEvents: isChatOpen ? 'none' : 'auto',
-            zIndex: 5,
+            zIndex: 50,
             width: isMobile ? '150px' : '200px',
             height: isMobile ? '150px' : '200px'
           }}
