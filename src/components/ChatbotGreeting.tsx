@@ -13,31 +13,21 @@ interface ChatbotGreetingProps {
 export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrollProgress, isMobile }: ChatbotGreetingProps) {
   if (!isVisible) return null;
 
+  const scale = isMobile ? 0.5 : 1 - scrollProgress * 0.5;
+
   return (
     <div
       className="fixed z-40"
       style={{
-        left: isMobile ? 'auto' : '0',
-        right: isMobile ? '0' : 'auto',
+        left: isMobile ? 'auto' : '16px',
+        right: isMobile ? '16px' : 'auto',
         bottom: isMobile ? '150px' : '200px',
-        transform: isMobile ? 'scale(0.5)' : `scale(${1 - scrollProgress * 0.5})`,
+        transform: `scale(${scale})`,
         transformOrigin: isMobile ? 'bottom right' : 'bottom left',
         transition: 'transform 0.1s ease-out',
-        animation: 'slideUp 0.5s ease-out forwards'
+        opacity: 1
       }}
     >
-      <style jsx>{`
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
       <div className="bg-white rounded-xl shadow-xl p-4 w-64 relative">
         {/* Close button */}
         <button
