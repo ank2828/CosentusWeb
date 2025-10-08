@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import WaveSurfer from 'wavesurfer.js';
 import Image from 'next/image';
+import { useIsMobile } from '@/hooks/useMediaQuery';
 import {
   Headphones,
   Info,
@@ -93,6 +94,7 @@ const capabilities = [
 ];
 
 export default function CindyCard() {
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState<'demo' | 'capabilities'>('demo');
   const [activeScenario, setActiveScenario] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -192,17 +194,17 @@ export default function CindyCard() {
       layout
       style={{
         position: 'relative',
-        padding: '3rem',
+        padding: isMobile ? '1.5rem' : '3rem',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
         backdropFilter: 'blur(40px)',
         WebkitBackdropFilter: 'blur(40px)',
         border: '1px solid rgba(255, 255, 255, 0.6)',
-        borderRadius: '3rem',
+        borderRadius: isMobile ? '1.5rem' : '3rem',
         maxWidth: '1200px',
-        marginLeft: 'auto',
-        marginRight: '3rem',
-        marginBottom: '4rem',
+        marginLeft: isMobile ? '1rem' : 'auto',
+        marginRight: isMobile ? '1rem' : '3rem',
+        marginBottom: isMobile ? '2rem' : '4rem',
         zIndex: 1
       }}
     >
@@ -221,31 +223,32 @@ export default function CindyCard() {
           zIndex: 10
         }}
       >
-        <span style={{ color: '#111827', fontWeight: 600, fontSize: '1.125rem', fontStyle: 'italic' }}>Have you met Cindy?</span>
+        <span style={{ color: '#111827', fontWeight: 600, fontSize: isMobile ? '0.875rem' : '1.125rem', fontStyle: 'italic' }}>Have you met Cindy?</span>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
-        {/* Left: Cindy Image */}
+      <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center', gap: '1rem', width: '100%' }}>
+        {/* Cindy Image */}
         <div
           style={{
             flexShrink: 0,
-            width: '300px',
-            height: '300px',
-            position: 'relative'
+            width: isMobile ? '200px' : '300px',
+            height: isMobile ? '200px' : '300px',
+            position: 'relative',
+            margin: isMobile ? '0 auto' : '0'
           }}
         >
           <Image
             src="/images/ChatGPT Image Oct 1, 2025, 03_12_24 PM.png"
             alt="Cindy AI Avatar"
-            width={300}
-            height={300}
+            width={isMobile ? 200 : 300}
+            height={isMobile ? 200 : 300}
             style={{ objectFit: 'contain', display: 'block', width: '100%', height: '100%' }}
             priority
           />
         </div>
 
-      {/* Right: Interactive Content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      {/* Interactive Content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: isMobile ? '100%' : 'auto' }}>
 
         {/* Toggle Buttons */}
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
@@ -358,13 +361,13 @@ export default function CindyCard() {
                 transition={{ duration: 0.3 }}
                 style={{ marginBottom: '1.5rem' }}
               >
-                <p style={{ fontSize: '1.125rem', color: '#ffffff', marginBottom: '1rem', fontWeight: 500, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+                <p style={{ fontSize: isMobile ? '0.875rem' : '1.125rem', color: '#ffffff', marginBottom: '1rem', fontWeight: 500, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
                   Patient asks: &ldquo;{scenarios[activeScenario].question}&rdquo;
                 </p>
 
                 {/* Animated Frequency Bars - FULL WIDTH */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem', height: '120px', padding: '0.5rem 0', width: '100%' }}>
-                  {[...Array(30)].map((_, i) => {
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: isMobile ? '0.15rem' : '0.25rem', height: isMobile ? '80px' : '120px', padding: '0.5rem 0', width: '100%' }}>
+                  {[...Array(isMobile ? 15 : 30)].map((_, i) => {
                     const baseHeight = 40 + Math.sin(i * 0.5) * 30;
                     const animatedHeight = isPlaying ? baseHeight + Math.sin((currentTime + i) * 1.6) * 40 : baseHeight * 0.3;
                     return (
@@ -495,7 +498,7 @@ export default function CindyCard() {
               transition={{ duration: 0.3 }}
               style={{ flex: 1 }}
             >
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '1rem' }}>
                 {capabilities.map((capability, idx) => {
                   const CapIcon = capability.icon;
                   return (
@@ -506,7 +509,7 @@ export default function CindyCard() {
                       transition={{ duration: 0.3, delay: idx * 0.05 }}
                       whileHover={{ y: -2, scale: 1.01 }}
                       style={{
-                        padding: '1.5rem',
+                        padding: isMobile ? '1rem' : '1.5rem',
                         backgroundColor: '#ffffff',
                         border: '1px solid #e5e7eb',
                         borderRadius: '0.75rem',
