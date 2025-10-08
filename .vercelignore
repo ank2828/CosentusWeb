@@ -1,0 +1,24 @@
+# Python backend (deploy separately if needed)
+backend/
+
+# Development and test files
+test-output.css
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+README.md
+
+# WordPress PHP files
+*.php
+
+# Local environment files
+.env*.local
+.claude/
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/
