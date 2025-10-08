@@ -269,7 +269,7 @@ export default function LeadCaptureModal({
           <>
             <h2 className="lead-capture-title">Before we start...</h2>
             <p className="lead-capture-subtitle">
-              Let's get to know each other
+              Let&apos;s get to know each other
             </p>
 
             <div className="lead-capture-form">
@@ -311,7 +311,7 @@ export default function LeadCaptureModal({
           <>
             <h2 className="lead-capture-title">Great! One more thing...</h2>
             <p className="lead-capture-subtitle">
-              What's your email address?
+              What&apos;s your email address?
             </p>
 
             <div className="lead-capture-form">

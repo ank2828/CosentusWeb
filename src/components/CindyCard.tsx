@@ -360,7 +360,7 @@ export default function CindyCard() {
                 style={{ marginBottom: '1.5rem' }}
               >
                 <p style={{ fontSize: '1.125rem', color: '#ffffff', marginBottom: '1rem', fontWeight: 500, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
-                  Patient asks: "{scenarios[activeScenario].question}"
+                  Patient asks: &ldquo;{scenarios[activeScenario].question}&rdquo;
                 </p>
 
                 {/* Animated Frequency Bars - FULL WIDTH */}

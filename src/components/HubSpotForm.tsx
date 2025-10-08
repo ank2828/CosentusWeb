@@ -190,7 +190,7 @@ export default function HubSpotForm({
       <div className="hubspot-form-wrapper">
         <h2 className="hubspot-form-title">Before we start...</h2>
         <p className="hubspot-form-subtitle">
-          Let's get to know each other
+          Let&apos;s get to know each other
         </p>
         {error && (
           <div style={{color: '#DC2626', marginBottom: '1rem', textAlign: 'center'}}>
