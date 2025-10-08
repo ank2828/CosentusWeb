@@ -17,10 +17,11 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
     <div
       className="fixed z-40"
       style={{
-        left: isMobile ? '130px' : '180px',
-        bottom: isMobile ? '75px' : '100px',
+        left: isMobile ? 'auto' : '0',
+        right: isMobile ? '0' : 'auto',
+        bottom: isMobile ? '150px' : '200px',
         transform: isMobile ? 'scale(0.5)' : `scale(${1 - scrollProgress * 0.5})`,
-        transformOrigin: 'bottom left',
+        transformOrigin: isMobile ? 'bottom right' : 'bottom left',
         transition: 'transform 0.1s ease-out',
         animation: 'slideUp 0.5s ease-out forwards'
       }}
@@ -37,7 +38,7 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
           }
         }
       `}</style>
-      <div className="bg-white rounded-xl shadow-xl p-4 w-80 relative">
+      <div className="bg-white rounded-xl shadow-xl p-4 w-64 relative">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -48,7 +49,7 @@ export default function ChatbotGreeting({ onStartChat, onClose, isVisible, scrol
         </button>
 
         {/* Content */}
-        <div className="pr-4">
+        <div className="text-center">
           <h3 className="text-lg font-bold text-gray-900 mb-1">
             Hey! I&apos;m COSE AI 👋
           </h3>
