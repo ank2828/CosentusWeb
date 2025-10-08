@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useIsMobile } from '@/hooks/useMediaQuery';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const isMobile = useIsMobile();
@@ -59,21 +60,42 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Dropdown Menu */}
-        {isMobile && isMenuOpen && (
-          <div className="pb-4 border-t border-gray-200">
-            <div className="flex flex-col space-y-3 pt-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-black hover:text-gray-600 transition-colors text-base font-light py-2"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
+        {isMobile && (
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{
+                  height: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                  opacity: { duration: 0.25, ease: 'easeInOut' }
+                }}
+                className="overflow-hidden border-t border-gray-200"
+              >
+                <div className="flex flex-col space-y-1 pt-4 pb-4">
+                  {navLinks.map((link, index) => (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: -20, opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: index * 0.05,
+                        ease: [0.4, 0, 0.2, 1]
+                      }}
+                      className="text-black hover:text-gray-600 hover:bg-gray-50 transition-all text-base font-light py-3 px-2 rounded-md"
+                    >
+                      {link.label}
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
       </div>
     </nav>
