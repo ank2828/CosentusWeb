@@ -56,12 +56,6 @@ const scenarios = [
 
 const capabilities = [
   {
-    icon: Globe,
-    title: 'Languages Supported',
-    stat: '10+',
-    description: 'English, Spanish, Mandarin, Hindi, Arabic, and more',
-  },
-  {
     icon: Phone,
     title: 'Concurrent Calls',
     stat: '20',
@@ -84,12 +78,6 @@ const capabilities = [
     title: 'Response Time',
     stat: '<2s',
     description: 'Instant answers with natural conversation flow'
-  },
-  {
-    icon: DollarSign,
-    title: 'Monthly Savings',
-    stat: '$8K+',
-    description: 'vs. hiring 3 full-time receptionists'
   }
 ];
 
