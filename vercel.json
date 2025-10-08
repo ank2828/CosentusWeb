@@ -20,9 +20,5 @@
         }
       ]
     }
-  ],
-  "env": {
-    "HUBSPOT_ACCESS_TOKEN": "@hubspot_access_token",
-    "N8N_WEBHOOK_URL": "@n8n_webhook_url"
-  }
+  ]
 }
