@@ -38,13 +38,14 @@ export default function Home() {
 
         {/* Spline Container - Smooth shrink on scroll */}
         <div
-          className="fixed inset-0 w-full h-screen z-0"
+          className="fixed inset-0 w-full h-screen"
           style={{
             transform: `scale(${1 - scrollProgress * 0.5})`,
             transformOrigin: 'bottom left',
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            zIndex: 5
           }}
         >
           <SplineWrapper scene="https://prod.spline.design/es79cdoxZI9dSURm/scene.splinecode" />
