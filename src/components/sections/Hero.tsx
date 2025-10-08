@@ -68,7 +68,10 @@ export default function Home() {
         </div>
 
         {/* Content that goes over the Spline */}
-        <div className={`relative z-10 flex flex-col h-full items-center justify-center pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-32' : 'pt-24'}`}>
+        <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-32 justify-center' : 'pt-24'}`}>
+          {/* Spacer - desktop only */}
+          {!isMobile && <div className="mt-16"></div>}
+
           {/* Hero Content */}
           <div className={`flex items-start ${isMobile ? 'justify-center' : 'justify-end'}`}>
             <div className={isMobile ? 'text-center' : 'text-right'} style={{ width: '100%', maxWidth: '1280px' }}>
