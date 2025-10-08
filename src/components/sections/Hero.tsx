@@ -79,7 +79,7 @@ export default function Home() {
         </div>
 
         {/* Content that goes over the Spline */}
-        <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-32 justify-center' : 'pt-24'}`}>
+        <div className={`relative z-10 flex flex-col h-full pointer-events-none px-4 md:px-16 lg:px-24 ${isMobile ? 'pt-20 justify-center' : 'pt-24'}`}>
           {/* Spacer - desktop only */}
           {!isMobile && <div className="mt-16"></div>}
 
