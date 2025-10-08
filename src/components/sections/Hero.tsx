@@ -42,11 +42,9 @@ export default function Home() {
         <div
           className="fixed cursor-pointer"
           style={{
-            transform: isMobile
-              ? `translateX(-50%) scale(${1 - scrollProgress * 0.5})`
-              : `scale(${1 - scrollProgress * 0.5})`,
-            transformOrigin: isMobile ? 'bottom center' : 'bottom left',
-            left: isMobile ? '50%' : '0',
+            transform: `scale(${1 - scrollProgress * 0.5})`,
+            transformOrigin: 'bottom left',
+            left: '0',
             bottom: 0,
             transition: `transform 0.1s ease-out, opacity ${isChatOpen ? '0.3s' : '0.4s'} ease-in-out`,
             opacity: isChatOpen ? 0 : 1,
