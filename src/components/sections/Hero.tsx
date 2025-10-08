@@ -134,6 +134,8 @@ export default function Home() {
           setIsGreetingVisible(false);
         }}
         onClose={() => setIsGreetingVisible(false)}
+        scrollProgress={scrollProgress}
+        isMobile={isMobile}
       />
 
       {/* Cosentus Chatbot - triggered by Spline avatar */}
